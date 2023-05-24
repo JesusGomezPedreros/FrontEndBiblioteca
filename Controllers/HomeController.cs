@@ -1,4 +1,5 @@
 ﻿using FrontEndBiblioteca.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Modelos.Modelos;
 using Newtonsoft.Json;
@@ -28,32 +29,37 @@ namespace FrontEndBiblioteca.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(Login login)
         {
-            var respuesta= String.Empty;
+            var respuesta = String.Empty;
             var estudiante = String.Empty;
             var profesores = String.Empty;
-            
+            var cursos = String.Empty;
+
             try
             {
                 respuesta = await _proyectoSevices.IniciarSesion(login);
                 estudiante = await _proyectoSevices.ConsultaTodosEstudiantesMaterias();
                 profesores = await _proyectoSevices.ConsultaTodosProfesoresMaterias();
+                cursos = await _proyectoSevices.ConsultaCursos();
 
             }
             catch (Exception)
             {
 
-               
+
             }
             if (respuesta != "\"El login no existe\"")
             {
                 var informacion = JsonConvert.DeserializeObject<List<RespuestaLogin>>((string)JsonConvert.DeserializeObject(respuesta));
                 var informacionEstudiantes = JsonConvert.DeserializeObject<List<RespuestaLogin>>(estudiante);
                 var informacionProfesores = JsonConvert.DeserializeObject<List<RespuestaLogin>>(profesores);
+                var informacionCursos = JsonConvert.DeserializeObject<List<CrearMateriaViewModel>>(cursos);
+               
                 var modeloUsuario = new
                 {
                     informacionUsuario = informacion,
                     informacionEstudiantes = informacionEstudiantes,
-                    informacionProfesores = informacionProfesores
+                    informacionProfesores = informacionProfesores,
+                    informacionCursos = informacionCursos,
                 };
                 return View(modeloUsuario);
             }
@@ -61,7 +67,7 @@ namespace FrontEndBiblioteca.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
-            
+
         }
         public IActionResult RegistrarUsuario()
         {
@@ -84,7 +90,7 @@ namespace FrontEndBiblioteca.Controllers
             }
             catch (Exception)
             {
-                
+
             }
             var usuarioCreado = await _proyectoSevices.RegistrarUsuarios(registroUsuario);
             var resultado = JsonConvert.DeserializeObject(usuarioCreado);
@@ -92,6 +98,27 @@ namespace FrontEndBiblioteca.Controllers
             TempData["UsuarioCreado"] = resultado.ToString();
 
             return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> CrearMateria(CrearMateriaViewModel crearMateriaViewModel)
+        {
+            var modelo = new CrearMateriaViewModel
+            {
+                nombreMateria = crearMateriaViewModel.nombreMateria.ToUpper(),
+                usuarioCrea = _macService.TraerDireccionMac(),
+                horasClase = crearMateriaViewModel.horasClase
+            };
+            var resultado = await _proyectoSevices.CrearMateria(modelo);
+
+
+            return RedirectToAction(nameof(Login));
+        }
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            // Cierra la sesión del usuario y redirige a la página de inicio
+            HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

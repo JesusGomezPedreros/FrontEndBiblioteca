@@ -1,0 +1,48 @@
+﻿
+body {
+    background-image: url('https://images.pexels.com/photos/1134160/pexels-photo-1134160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100vh;
+    background-attachment: fixed;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.card {
+    background: transparent;
+    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 10%;
+    max-width: 500px;
+    padding: 30px;
+}
+
+    .card * {
+        /* Esta regla se aplica a todos los elementos hijos de la tarjeta */
+        opacity: 1; /* Establece la opacidad de los elementos internos en 1 para que no se vean afectados por la opacidad del color de fondo */
+    }
+
+.btn {
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+.form-check {
+    margin-top: 10px;
+}
+
+</style >

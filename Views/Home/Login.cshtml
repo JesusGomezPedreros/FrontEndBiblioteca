@@ -3,7 +3,7 @@
 <html dir="ltr" lang="en">
 @model dynamic
 <head>
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
@@ -55,12 +55,31 @@
                     <h5 class="card-title">Imagen Ejemplo</h5>
                     <img src="~/images/users/9.jpg" class="img-fluid " alt="users">
                     <p class="mt-2">Esta Imagen Cambiara dependiendo del usuario</p>
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#centermodal">Informacion Basica</button>
+                    @if (Model.informacionUsuario[0].TIPOUSUARIO == "ADMINISTRADOR")
+                    {
+                        <div class="mt-3">
+                            <div class="mt-3">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#centermodal">Informacion Basica</button>
+                            </div>
+                            <div class="mt-3">
+                                <button type="button" class="btn waves-effect waves-light btn-warning" data-toggle="modal" data-target="#crearMateria">Crear Curso</button>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mt-3">
+                            <div class="mt-3">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#centermodal">Informacion Basica</button>
+                            </div>
+                        </div>
+                    }
+
                 </div>
                 <hr>
                 <div class="p-3">
                     <h5 class="card-title">Informacion Basica</h5>
-                    <form class="mt-3">
+                    <form class="mt-3" action="/Home/Logout/" method="post">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nombre Usuario</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" value="@Model.informacionUsuario[0].NOMBRES @Model.informacionUsuario[0].APELLIDOS" readonly>
@@ -69,7 +88,9 @@
                             <label for="exampleInputPassword1">Rol Usuario</label>
                             <input type="text" class="form-control" id="exampleInputPassword1" value="@Model.informacionUsuario[0].TIPOUSUARIO" readonly>
                         </div>
-                        <button type="submit" class="btn btn-success"><a href="http://10.0.20.254/">Cerra Sesion</a></button>
+                       
+                        <button type="submit" class="btn btn-success">Cerra Sesion</a></button>
+                        
                     </form>
                 </div>
                 <hr>
@@ -91,98 +112,269 @@
                         <h4 class="card-title">Informacion</h4>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Estudiantes</h4>
-                        <h6 class="card-subtitle">
-                            Se veran todos los estudiantes y su respectiva materia asignada
-                        </h6>
-                        <div class="table-responsive">
-                            <table id="default_order" class="table table-striped table-bordered display"
-                                   style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Tipo Documento</th>
-                                        <th>Numero Identificacion</th>
-                                        <th>Nombre Materia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var estudiante in Model.informacionEstudiantes)
-                                    {
+                @if (Model.informacionUsuario[0].TIPOUSUARIO == "ADMINISTRADOR")
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Estudiantes</h4>
+                            <h6 class="card-subtitle">
+                                Se veran todos los estudiantes y su respectiva Curso asignada
+                            </h6>
+                            <div class="table-responsive">
+                                <table id="default_order" class="table table-striped table-bordered display"
+                                       style="width:100%">
+                                    <thead>
                                         <tr>
-                                            <td>@estudiante.IDUSUARIO</td>
-                                            <td>@estudiante.NOMBRES</td>
-                                            <td>@estudiante.APELLIDOS</td>
-                                            <td>@estudiante.TIPOIDENTIFICACION</td>
-                                            <td>@estudiante.NUMEROIDENTIFICACION</td>
-                                            <td>@estudiante.NOMBREMATERIA</td>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
                                         </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Tipo Documento</th>
-                                        <th>Numero Identificacion</th>
-                                        <th>Nombre Materia</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var estudiante in Model.informacionEstudiantes)
+                                        {
+                                            <tr>
+                                                <td>@estudiante.IDUSUARIO</td>
+                                                <td>@estudiante.NOMBRES</td>
+                                                <td>@estudiante.APELLIDOS</td>
+                                                <td>@estudiante.TIPOIDENTIFICACION</td>
+                                                <td>@estudiante.NUMEROIDENTIFICACION</td>
+                                                <td>@estudiante.NOMBREMATERIA</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Profesores</h4>
-                        <h6 class="card-subtitle">
-                            Se veran todos los Profesores y su respectiva materia
-                        </h6>
-                        <div class="table-responsive">
-                            <table id="default_order" class="table table-striped table-bordered display"
-                                   style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Tipo Documento</th>
-                                        <th>Numero Identificacion</th>
-                                        <th>Nombre Materia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var estudiante in Model.informacionProfesores)
-                                    {
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Profesores</h4>
+                            <h6 class="card-subtitle">
+                                Se veran todos los Profesores y su respectiva Curso
+                            </h6>
+                            <div class="table-responsive">
+                                <table id="default_order" class="table table-striped table-bordered display"
+                                       style="width:100%">
+                                    <thead>
                                         <tr>
-                                            <td>@estudiante.IDUSUARIO</td>
-                                            <td>@estudiante.NOMBRES</td>
-                                            <td>@estudiante.APELLIDOS</td>
-                                            <td>@estudiante.TIPOIDENTIFICACION</td>
-                                            <td>@estudiante.NUMEROIDENTIFICACION</td>
-                                            <td>@estudiante.NOMBREMATERIA</td>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
                                         </tr>
-                                    }
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Tipo Documento</th>
-                                        <th>Numero Identificacion</th>
-                                        <th>Nombre Materia</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var estudiante in Model.informacionProfesores)
+                                        {
+                                            <tr>
+                                                <td>@estudiante.IDUSUARIO</td>
+                                                <td>@estudiante.NOMBRES</td>
+                                                <td>@estudiante.APELLIDOS</td>
+                                                <td>@estudiante.TIPOIDENTIFICACION</td>
+                                                <td>@estudiante.NUMEROIDENTIFICACION</td>
+                                                <td>@estudiante.NOMBREMATERIA</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Cursos</h4>
+                            <h6 class="card-subtitle">
+                                Se veran todos los Cursos
+                            </h6>
+                            <div class="table-responsive">
+                                <table id="default_order" class="table table-striped table-bordered display"
+                                       style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var estudiante in Model.informacionCursos)
+                                        {
+                                            <tr>
+                                                <td>@estudiante.IDMateria</td>
+                                                <td>@estudiante.NombreMateria</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (Model.informacionUsuario[0].TIPOUSUARIO == "PROFESOR")
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Estudiantes</h4>
+                            <h6 class="card-subtitle">
+                                Se veran todos los estudiantes y su respectiva Curso asignada
+                            </h6>
+                            <div class="table-responsive">
+                                <table id="default_order" class="table table-striped table-bordered display"
+                                       style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var estudiante in Model.informacionEstudiantes)
+                                        {
+                                            <tr>
+                                                <td>@estudiante.IDUSUARIO</td>
+                                                <td>@estudiante.NOMBRES</td>
+                                                <td>@estudiante.APELLIDOS</td>
+                                                <td>@estudiante.TIPOIDENTIFICACION</td>
+                                                <td>@estudiante.NUMEROIDENTIFICACION</td>
+                                                <td>@estudiante.NOMBREMATERIA</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Cursos</h4>
+                            <h6 class="card-subtitle">
+                                Se veran todos los Cursos
+                            </h6>
+                            <div class="table-responsive">
+                                <table id="default_order" class="table table-striped table-bordered display"
+                                       style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var estudiante in Model.informacionCursos)
+                                        {
+                                            <tr>
+                                                <td>@estudiante.IDMateria</td>
+                                                <td>@estudiante.NombreMateria</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Profesores</h4>
+                            <h6 class="card-subtitle">
+                                Se veran todos los Profesores y su respectiva Curso
+                            </h6>
+                            <div class="table-responsive">
+                                <table id="default_order" class="table table-striped table-bordered display"
+                                       style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var estudiante in Model.informacionProfesores)
+                                        {
+                                            <tr>
+                                                <td>@estudiante.IDUSUARIO</td>
+                                                <td>@estudiante.NOMBRES</td>
+                                                <td>@estudiante.APELLIDOS</td>
+                                                <td>@estudiante.TIPOIDENTIFICACION</td>
+                                                <td>@estudiante.NUMEROIDENTIFICACION</td>
+                                                <td>@estudiante.NOMBREMATERIA</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Tipo Documento</th>
+                                            <th>Numero Identificacion</th>
+                                            <th>Nombre Curso</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
             </div>
         </div>
         <footer class="footer text-center">
@@ -192,6 +384,36 @@
 
     </div>
     <!-- ============================================================== -->
+    <!-- Modales -->
+    <!-- ============================================================== -->
+    <div class="modal fade" id="crearMateria" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title" id="mycrearMateriaLabel">Crear Curso</h4>
+                    <button type="button" class="close ml-auto" data-dismiss="modal"
+                            aria-hidden="true">
+                        ×
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal pt-12" id="crearMateriaForm" action="/Home/CrearMateria/" method="post">
+                        <div class="form-group">
+                            <label for="username">Nombre Curso</label>
+                            <input type="text" class="form-control" id="nombreMateria" name="nombreMateria" placeholder="Ingresa Nombre Curso" required minlength="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Horas Curso</label>
+                            <input class="form-control" type="number" id="horasClase" name="horasClase" required minlength="1">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info waves-effect waves-light">Crear Curso</button>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
     <!-- Modales -->
     <!-- ============================================================== -->
     <!-- Center modal content -->
@@ -258,7 +480,17 @@
     <script src="~/libs/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="~/js/pages/datatable/custom-datatable.js"></script>
     <script src="~/js/pages/datatable/datatable-basic.init.js"></script>
-    
+    <script>
+        function validarFormulario() {
+            var form = document.getElementById('crearMateriaForm');
+            if (form.checkValidity() === false) {
+                form.classList.add('was-validated');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
 </body>
 
 </html>
