@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/materialpro/" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row row align-items-center justify-content-center" style="height: 100vh;">
+            <div class="col-lg-8 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Registro de usuario</h4>
+                        <h6 class="card-subtitle">completa la informacion para crear usuario</h6>
+                        <form class="form-horizontal pt-12" action="/Home/RegistrarUsuario/" method="post">
+                            <div class="form-group row">
+                                <label for="datos" class="col-sm-3 control-label">Nombres*</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ti-user"></i></span></div>
+                                        <input type="text" class="form-control" id="nombres" name="nombres" placeholder="Ingresa Nombres" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="datos" class="col-sm-3 control-label">Apellidos*</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ti-user"></i></span></div>
+                                        <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingresa Apellidos" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3">Tipo Identificacion</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="tipoIdentificacion">
+                                        <option>Seleccione una opcion</option>
+                                        <option value="Cedula">Cedula</option>
+                                        <option value="Tarjeta identidad">Tarjeta identidad</option>
+                                        <option value="Cedula extranjeria">Cedula extranjeria</option>
+                                        <option value="Pasaporte">Pasaporte</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="web" class="col-sm-3">Numero identificacion</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ti-world"></i></span></div>
+                                        <input type="text" class="form-control" id="numeroIdentificacion" name="numeroIdentificacion" placeholder="Ingrese su numero ID" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="usuario" class="col-sm-3 control-label">Usuario*</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ti-user"></i></span></div>
+                                        <input type="text" class="form-control" id="usuario" name="nombreLogin" placeholder="Ingrese Usuario" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 control-label">Password*</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="ti-lock"></i></span></div>
+                                        <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Ingrese contraseña" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3">Tipo Usuario</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="idRol">
+                                        <option>Seleccione una opcion</option>
+                                        <option value="2">Profesor</option>
+                                        <option value="3">Alumno</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0">
+                                <div class="offset-sm-3 col-sm-9">
+                                    <button type="submit" class="btn btn-info waves-effect waves-light" onclick="mostrarNotificacion()">Crear Usuario</button>
+
+                                    <button type="button" class="btn btn-info waves-effect waves-light" onclick="window.history.back()">Regresar</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- apps -->
+    <script src="~/js/app.min.js"></script>
+    <script src="~/js/app.init.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="~/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.min.js"></script>
+
+    <script>
+        function mostrarNotificacion() {
+
+            // Obtener el valor de una variable ViewData o TempData que indique si el usuario se creó correctamente
+            var usuarioCreado = '@(TempData.Peek("UsuarioCreado") ?? "")';
+
+            // Verificar si el usuario se creó correctamente y mostrar la notificación correspondiente
+            if (usuarioCreado === "[{\"resultadodb\":\"vacio\"}]") {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuario Crado',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else if (usuarioCreado === "El usuario ya existe") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Usuario ya existe',
+                    timer: 1500
+                })
+            }
+        }
+    </script>
+</body>
+</html>

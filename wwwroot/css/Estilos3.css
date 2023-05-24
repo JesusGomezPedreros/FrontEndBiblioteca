@@ -1,0 +1,245 @@
+﻿
+.textoactivo {
+    COLOR: #6c757d !IMPORTANT;
+    FONT-WEIGHT: 800;
+}
+
+.card-colmas2 {
+    background: white;
+    box-shadow: 0 0 0 0 rgb(0 251 82 / 11%), 0 4px 16px 0 rgb(57 255 66 / 33%);
+}
+
+    .card-colmas2 h4 {
+        color: #001f32 !important;
+        top: -5px;
+        font-size: 14px;
+    }
+
+.parrafoclientes {
+    font-size: 10px;
+    text-align: left;
+    font-weight: bolder;
+    position: relative;
+    padding-left: 14px;
+}
+
+.icono-card-colmas2 {
+    font-size: 15px;
+    vertical-align: middle;
+}
+
+.card-colmas2 p span {
+    padding-left: 2px;
+}
+
+.spanicono2 {
+    margin-bottom: -2.5rem;
+    line-height: 3;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.trm {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.parrafocliente3 {
+    font-size: 16px;
+    padding-top: 0;
+    font-weight: 900;
+    color: black;
+    padding-right: 197px;
+    padding-left: 15px;
+    left: 10px;
+}
+
+
+
+font {
+    color: white !important
+}
+
+.borde {
+    border-bottom-left-radius: 19px !important;
+    border-bottom-right-radius: 19px !important;
+}
+
+.random {
+    background-color: #F4B488 !important;
+}
+
+div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+    div.scrollmenu div {
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+    }
+
+    div.scrollmenu a:hover {
+        background-color: #777;
+    }
+
+.padrescroll2 {
+    display: block !important;
+    white-space: nowrap;
+    overflow: auto;
+    padding: 12px;
+}
+
+.hijoscroll2 {
+    right: 0px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 13px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: whitesmoke;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: whitesmoke;
+    }
+
+.image {
+    vertical-align: middle;
+    width: 60px;
+    height: 60px;
+    position: relative;
+    left: 194px;
+    top: -27px;
+    cursor: pointer;
+}
+
+.coltrans {
+    background-color: #ffffff !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.sombracoldepositos {
+    box-shadow: 0 0 0 0 rgb(0 251 82 / 11%), 0 4px 16px 0 rgb(243 146 0) !important;
+}
+
+.card-cuerpo:active {
+    border-bottom: 4px solid;
+    border-bottom-color: orange;
+}
+
+.card-cuerpo:hover {
+    border-bottom: 4px solid;
+    border-bottom-color: orange;
+}
+
+
+.empresaslogo {
+    font-size: 17px !important;
+    font-weight: 900 !important;
+    margin-bottom: 0.5rem !important;
+    margin-top: 10px;
+    line-height: normal !important;
+    vertical-align: middle !important;
+    text-align: center;
+    padding-right: 11px;
+}
+
+.iconologoempresas {
+    width: 35px;
+    padding-left: 10px;
+}
+
+.trmtexto {
+    text-align: center;
+    color: gray !important;
+}
+
+.p-3 {
+    padding: 7px !important;
+}
+
+.img-xs {
+    width: 100px !important;
+    height: 100px !important;
+}
+
+.col-sm-6 {
+    flex: 0 0 auto;
+    width: 50%;
+    height: 10px;
+}
+
+.sidebar {
+    background: #001f32 !important;
+}
+
+h4 {
+    font-size: 12px !important;
+}
+
+.trmtexto {
+    font-size: 12px !important;
+}
+.card-zoom {
+    transition: transform .2s;
+    border-radius: 0px !important;
+}
+
+    .card-zoom:hover {
+        transform: scale(1.03);
+        cursor: pointer;
+    }
+
+.active-line-card {
+    border-top: 5px solid #AECC53 !important;
+}
+
+.line-card-hover {
+    position: sticky;
+    border-top: 5px solid #CCCCCC;
+    top: 0;
+    z-index: 9999;
+}
+
+.card-zoom:hover .line-card-hover {
+    border-top: 5px solid #AECC53;
+}
+
+.card-padding-custom {
+    padding: 1.2rem 0.5rem !important;
+}
+
+.card-title {
+    font-size: 1rem !important;
+    text-transform: none !important;
+    margin-bottom: 0.2rem !important;
+    color: #999999 !important;
+}
+
+.shadow-card {
+    box-shadow: 0.3rem 0.3rem 0.5rem rgb(0 0 0 / 20%) !important;
+}
+
